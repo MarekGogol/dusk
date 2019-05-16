@@ -277,12 +277,12 @@ trait InteractsWithElements
     {
         $element = $this->resolver->resolveForAttachment($field);
 
-        $files = array_map(function($local_file){
-            if (!is_file($local_file) || !file_exists($local_file)) {
-                throw new Exception('You may only upload existing files: ' . $local_file);
+        $files = array_map(function($file){
+            if (! is_file($file) || ! file_exists($file)) {
+                throw new Exception('You may only upload existing files: '.$file);
             }
 
-            return realpath($local_file);
+            return realpath($file);
         }, $paths);
 
         $element->sendKeys(implode("\n ", $files));
